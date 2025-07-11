@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infografik: Einblicke in die KI-Schulung</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- 
+    AI Infographic SPA Plan
+    Narrative & Structure:
+    1.  Header: Title and introduction.
+    2.  Section 1: The Journey of AI - A historical timeline.
+    3.  Section 2: Understanding AI - Explaining the 4 levels (AI > ML > Deep Learning > GenAI).
+    4.  Section 3: The Game Changer: Generative AI - Highlighting efficiency gains and applications.
+    5.  Section 4: The Strategic Landscape - Gartner Hype Cycle visualization.
+    6.  Section 5: The Major Players - A comparison of leading LLMs.
+    7.  Section 6: Mastering the Conversation - Explaining the RTF Prompting Framework.
+    8.  Section 7: Navigating the Risks - Key legal & ethical considerations.
+    9.  Footer: Concluding statement.
+
+    Visualization Plan (NO SVG, NO MERMAID JS):
+    - Historical Timeline: Goal: Change -> Visualization: Timeline -> Method: HTML/CSS with Tailwind. Justification: Best for discrete events over time without SVG.
+    - 4 Levels of AI: Goal: Organize -> Visualization: Flow Diagram -> Method: HTML/CSS with Tailwind. Justification: Clearly shows nested relationships.
+    - Departmental Applications: Goal: Compare -> Visualization: Donut Chart -> Method: Chart.js/Canvas. Justification: Shows composition of AI use across business functions.
+    - Gartner Hype Cycle: Goal: Change -> Visualization: Line Chart -> Method: Chart.js/Canvas. Justification: Standard representation for technology maturity cycles.
+    - LLM Comparison: Goal: Compare -> Visualization: Horizontal Bar Chart -> Method: Chart.js/Canvas. Justification: Ideal for comparing features of different models, with better label readability.
+    - RTF Framework: Goal: Organize -> Visualization: Diagram -> Method: HTML/CSS with Tailwind. Justification: Simple, clear visual for a 3-step process.
+    - Risks Section: Goal: Organize -> Visualization: List with Icons -> Method: HTML/CSS with Unicode characters. Justification: Clean, scannable presentation of key points.
+
+    Color Palette:
+    - Name: Energetic & Playful
+    - HEX Codes: #00F0B5 (Bright Mint), #00E4F4 (Vibrant Cyan), #687DF2 (Royal Blue), #A06AF9 (Lively Lavender), #F2759F (Hot Pink/Coral).
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .hype-cycle-container {
+            position: relative;
+            width: 100%;
+            height: 350px;
+            max-height: 450px;
+        }
+         .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 1rem;
+            left: -0.875rem;
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 9999px;
+            background-color: #687DF2;
+            border: 4px solid #F3F4F6;
+            z-index: 10;
+        }
+        .timeline-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #D1D5DB;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <!-- Header -->
+        <header class="text-center mb-12 md:mb-16">
+            <h1 class="text-4xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#687DF2] to-[#A06AF9] mb-4">Die KI-Revolution</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Einblicke aus der Unternehmensschulung: Wie Künstliche Intelligenz unsere Arbeitsweise verändert und welche strategischen Chancen sich daraus ergeben.</p>
+        </header>
+
+        <main class="space-y-16">
+
+            <!-- Section 1: Journey of AI -->
+            <section id="history">
+                <h2 class="text-3xl font-bold text-center mb-10">Die Reise der Künstlichen Intelligenz</h2>
+                <div class="relative max-w-4xl mx-auto pl-8">
+                    <div class="timeline-line"></div>
+                    <div class="space-y-12">
+                        <div class="timeline-item relative pl-8 card">
+                            <h3 class="text-xl font-bold text-[#687DF2]">1950-1955: Die Geburtsstunde</h3>
+                            <p class="text-gray-600 mt-2">Alan Turing entwickelt den <strong>Turing-Test</strong>, um die Intelligenz einer Maschine zu bewerten. 1955 wird der Begriff <strong>"Künstliche Intelligenz"</strong> als Gedankenexperiment geprägt.</p>
+                        </div>
+                        <div class="timeline-item relative pl-8 card">
+                            <h3 class="text-xl font-bold text-[#687DF2]">1966-1997: Frühe Pioniere & KI-Winter</h3>
+                            <p class="text-gray-600 mt-2"><strong>"Eliza"</strong>, der erste Chatbot, entsteht. Es folgt eine lange Phase der Stagnation ("KI-Winter"), bis 1997 IBMs <strong>Deep Blue</strong> den Schachweltmeister Garri Kasparow besiegt.</p>
+                        </div>
+                        <div class="timeline-item relative pl-8 card">
+                            <h3 class="text-xl font-bold text-[#687DF2]">2011-2017: Aufstieg der Giganten</h3>
+                            <p class="text-gray-600 mt-2">Apples <strong>Siri</strong> macht KI alltagstauglich. Googles <strong>AlphaGo</strong> besiegt 2016 den Go-Weltmeister, ein Meilenstein, der die Überlegenheit der KI bei hochkomplexen strategischen Spielen demonstriert. 2017 legt Google mit der <strong>"Transformer"-Architektur</strong> den Grundstein für moderne Sprachmodelle.</p>
+                        </div>
+                        <div class="timeline-item relative pl-8 card">
+                            <h3 class="text-xl font-bold text-[#687DF2]">2022: Der "iPhone-Moment"</h3>
+                            <p class="text-gray-600 mt-2">OpenAI veröffentlicht <strong>ChatGPT</strong>. Das Tool erreicht in Rekordzeit 100 Millionen Nutzer und löst einen globalen Hype um Generative KI aus, der die Technologie in den Fokus von Unternehmen und Öffentlichkeit rückt.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Understanding AI -->
+            <section id="understanding">
+                <h2 class="text-3xl font-bold text-center mb-10">Was ist KI eigentlich? Von Regeln zu Kreativität</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                    <div class="card p-6">
+                        <div class="text-5xl mb-4">🤖</div>
+                        <h3 class="text-xl font-bold mb-2">Künstliche Intelligenz</h3>
+                        <p class="text-gray-600 text-sm">Der Überbegriff für Systeme, die menschliches Denken und Fähigkeiten wie Lernen und Planen imitieren.</p>
+                    </div>
+                    <div class="card p-6">
+                         <div class="text-5xl mb-4">🧠</div>
+                        <h3 class="text-xl font-bold mb-2">Maschinelles Lernen</h3>
+                        <p class="text-gray-600 text-sm">Ein Teilbereich der KI. Systeme lernen aus Daten Muster zu erkennen, ohne explizit dafür programmiert zu werden.</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="text-5xl mb-4">🕸️</div>
+                        <h3 class="text-xl font-bold mb-2">Deep Learning</h3>
+                        <p class="text-gray-600 text-sm">Ein Teilbereich des ML, der künstliche neuronale Netze nutzt, die dem menschlichen Gehirn nachempfunden sind.</p>
+                    </div>
+                    <div class="card p-6">
+                        <div class="text-5xl mb-4">✨</div>
+                        <h3 class="text-xl font-bold mb-2">Generative KI</h3>
+                        <p class="text-gray-600 text-sm">Die aktuelle Speerspitze. Erzeugt neue, originelle Inhalte wie Texte, Bilder, Code oder Videos.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Game Changer -->
+             <section id="game-changer">
+                <h2 class="text-3xl font-bold text-center mb-10">Der Game Changer: Generative KI im Unternehmen</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="card p-6 text-center">
+                        <p class="text-lg text-gray-600 mb-2">Effizienzsteigerung bei Wissensarbeitern durch den Einsatz von Generativer KI:</p>
+                        <div class="text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00F0B5] to-[#00E4F4]">
+                           +37%
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2">(Quelle: FAZ-Studie in Kombination mit gezielten Schulungen)</p>
+                    </div>
+                    <div class="card p-6">
+                        <h3 class="text-xl font-bold text-center mb-4">Top-Anwendungsbereiche nach Abteilungen</h3>
+                        <div class="chart-container">
+                            <canvas id="applicationsChart"></canvas>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-4 text-center">Generative KI wird abteilungsübergreifend eingesetzt, mit einem starken Fokus auf kreative und kommunikative Aufgaben in Marketing, HR und IT.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Section 4: Hype Cycle -->
+            <section id="hype-cycle">
+                <h2 class="text-3xl font-bold text-center mb-2">Strategische Landschaft: Der Gartner Hype Cycle für KI</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Der Hype Cycle hilft, den Reifegrad von Technologien einzuordnen und Erwartungen zu managen. Er zeigt, dass auf einen Hype oft eine Phase der Ernüchterung folgt, bevor der produktive Einsatz beginnt.</p>
+                <div class="card p-6">
+                    <div class="hype-cycle-container">
+                        <canvas id="hypeCycleChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Major Players -->
+            <section id="players">
+                 <h2 class="text-3xl font-bold text-center mb-10">Die wichtigsten Akteure im Vergleich</h2>
+                 <div class="card p-6">
+                    <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">Die Wahl des richtigen Sprachmodells hängt stark vom Anwendungsfall, den Datenschutzanforderungen und der gewünschten Integrationstiefe ab. Es gibt kein "bestes" Modell für alle Zwecke.</p>
+                    <div class="chart-container h-96 md:h-[500px]">
+                         <canvas id="modelsComparisonChart"></canvas>
+                    </div>
+                 </div>
+            </section>
+
+             <!-- Section 6: Prompting -->
+            <section id="prompting">
+                <h2 class="text-3xl font-bold text-center mb-10">Die Kunst des Gesprächs: Effektives Prompting</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Die Qualität der KI-Ergebnisse hängt entscheidend von der Qualität der Anweisung (Prompt) ab. Das einfache RTF-Framework hilft, präzise und wirkungsvolle Prompts zu erstellen.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="card p-8">
+                        <div class="text-6xl font-black text-[#687DF2] mx-auto mb-4">R</div>
+                        <h3 class="text-2xl font-bold">Rolle (Role)</h3>
+                        <p class="text-gray-600 mt-2">Geben Sie der KI eine Identität. <br><i>z.B. "Du bist ein erfahrener Marketingexperte."</i></p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="text-6xl font-black text-[#A06AF9] mx-auto mb-4">T</div>
+                        <h3 class="text-2xl font-bold">Aufgabe (Task)</h3>
+                        <p class="text-gray-600 mt-2">Beschreiben Sie präzise, was die KI tun soll. <br><i>z.B. "Entwickle 5 Slogans für unser neues Produkt."</i></p>
+                    </div>
+                    <div class="card p-8">
+                        <div class="text-6xl font-black text-[#F2759F] mx-auto mb-4">F</div>
+                        <h3 class="text-2xl font-bold">Format</h3>
+                        <p class="text-gray-600 mt-2">Definieren Sie die gewünschte Ausgabeform. <br><i>z.B. "Liste die Slogans in einer Tabelle mit Pro- & Contra-Argumenten."</i></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Risks -->
+            <section id="risks">
+                <h2 class="text-3xl font-bold text-center mb-10">Risiken navigieren: Rechtliche & ethische Aspekte</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6 flex items-start space-x-4">
+                        <div class="text-4xl text-[#F2759F]">🛡️</div>
+                        <div>
+                            <h3 class="text-xl font-bold">Datenschutz (DSGVO)</h3>
+                            <p class="text-gray-600 mt-2">Keine personenbezogenen Daten in öffentliche Tools eingeben. US-Datenverarbeitung ist kritisch. Europäische Modelle (z.B. Mistral) oder teure Enterprise-Lizenzen sind Alternativen.</p>
+                        </div>
+                    </div>
+                    <div class="card p-6 flex items-start space-x-4">
+                        <div class="text-4xl text-[#F2759F]">©️</div>
+                        <div>
+                            <h3 class="text-xl font-bold">Urheberrecht</h3>
+                            <p class="text-gray-600 mt-2">Die Rechtslage ist ungeklärt. Wer ist der Urheber von KI-generierten Inhalten? Die Frage, ob das Training an sich eine Urheberrechtsverletzung darstellt, ist Gegenstand aktueller Klagen.</p>
+                        </div>
+                    </div>
+                    <div class="card p-6 flex items-start space-x-4">
+                        <div class="text-4xl text-[#F2759F]">⚖️</div>
+                        <div>
+                            <h3 class="text-xl font-bold">Haftung</h3>
+                            <p class="text-gray-600 mt-2">Das Unternehmen haftet vollumfänglich für den Output der KI, nicht der Tool-Anbieter. Interne KI-Richtlinien sind unerlässlich, um Verantwortung zu regeln und Risiken zu minimieren.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 border-t pt-8">
+            <p class="text-gray-600">Die Zukunft der Arbeit liegt in der intelligenten Synergie von menschlicher Kreativität und künstlicher Effizienz.</p>
+            <p class="text-sm text-gray-400 mt-2">Infografik erstellt basierend auf der KI-Schulung vom 07.07.2025.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                }
+                return label;
+            };
+            
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#4B5563',
+                            font: {
+                                family: "'Inter', sans-serif"
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        backgroundColor: 'rgba(0,0,0,0.8)',
+                        titleFont: { size: 14, family: "'Inter', sans-serif" },
+                        bodyFont: { size: 12, family: "'Inter', sans-serif" },
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#6B7280', font: { family: "'Inter', sans-serif" } },
+                        grid: { color: '#E5E7EB' }
+                    },
+                    x: {
+                        ticks: { color: '#6B7280', font: { family: "'Inter', sans-serif" } },
+                        grid: { display: false }
+                    }
+                }
+            };
+            
+            function wrapLabels(label) {
+                const maxLen = 16;
+                if (label.length <= maxLen) {
+                    return label;
+                }
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+                for (const word of words) {
+                    if ((currentLine + ' ' + word).trim().length > maxLen && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                }
+                if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                }
+                return lines;
+            }
+
+            // Chart 1: Applications Chart
+            const applicationsCtx = document.getElementById('applicationsChart');
+            if(applicationsCtx) {
+                new Chart(applicationsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Marketing', 'IT & Entwicklung', 'Personalwesen (HR)', 'Vertrieb', 'Produktentwicklung', 'Geschäftsführung'],
+                        datasets: [{
+                            label: 'Anwendungsbereiche',
+                            data: [25, 20, 18, 15, 12, 10],
+                            backgroundColor: ['#687DF2', '#A06AF9', '#00F0B5', '#F2759F', '#00E4F4', '#FFC107'],
+                            borderColor: '#FFFFFF',
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { color: '#4B5563', font: { family: "'Inter', sans-serif" } }
+                            },
+                             tooltip: {
+                                callbacks: {
+                                    title: tooltipTitleCallback
+                                },
+                                backgroundColor: 'rgba(0,0,0,0.8)',
+                                titleFont: { size: 14, family: "'Inter', sans-serif" },
+                                bodyFont: { size: 12, family: "'Inter', sans-serif" },
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart 2: Hype Cycle
+            const hypeCycleCtx = document.getElementById('hypeCycleChart');
+            if(hypeCycleCtx) {
+                const hypeCycleData = {
+                    labels: ['Innovationsauslöser', 'Gipfel der überzogenen Erwartungen', 'Tal der Enttäuschungen', 'Pfad der Erleuchtung', 'Plateau der Produktivität'],
+                    datasets: [{
+                        label: 'Hype-Kurve',
+                        data: [0, 100, 20, 60, 80],
+                        borderColor: '#A06AF9',
+                        backgroundColor: 'rgba(160, 106, 249, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }, {
+                        label: 'Generative KI (5-10 Jahre)',
+                        data: [null, 95, null, null, null],
+                        pointStyle: 'circle',
+                        pointRadius: 10,
+                        pointHoverRadius: 15,
+                        backgroundColor: '#F2759F'
+                    }, {
+                        label: 'Computer Vision (< 2 Jahre)',
+                        data: [null, null, null, 70, null],
+                        pointStyle: 'circle',
+                        pointRadius: 10,
+                        pointHoverRadius: 15,
+                        backgroundColor: '#00F0B5'
+                    }]
+                };
+
+                new Chart(hypeCycleCtx, {
+                    type: 'line',
+                    data: hypeCycleData,
+                    options: {
+                        ...commonChartOptions,
+                        scales: {
+                            y: { display: false, min: 0, max: 110 },
+                            x: { ...commonChartOptions.scales.x, grid: { display: false } }
+                        },
+                        plugins: {
+                            ...commonChartOptions.plugins,
+                            tooltip: {
+                                ...commonChartOptions.plugins.tooltip,
+                                filter: function (tooltipItem) {
+                                    return tooltipItem.datasetIndex !== 0; 
+                                },
+                                callbacks: {
+                                    title: function(tooltipItems) { return ''; },
+                                    label: function (context) {
+                                        return context.dataset.label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Chart 3: Models Comparison
+            const modelsCtx = document.getElementById('modelsComparisonChart');
+            if (modelsCtx) {
+                const rawLabels = [
+                    'ChatGPT (OpenAI)', 'Google Gemini', 'Claude (Anthropic)', 'Mistral (EU)'
+                ];
+                new Chart(modelsCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: rawLabels.map(wrapLabels),
+                        datasets: [{
+                            label: 'Kreativität & Allrounder-Fähigkeiten',
+                            data: [9, 7, 8, 6],
+                            backgroundColor: '#687DF2',
+                            borderRadius: 4,
+                        }, {
+                            label: 'Integration & Kontextgröße',
+                            data: [6, 9, 7, 5],
+                            backgroundColor: '#A06AF9',
+                            borderRadius: 4,
+                        }, {
+                            label: 'Datenschutz-Fokus (EU)',
+                            data: [5, 4, 2, 9],
+                            backgroundColor: '#00F0B5',
+                            borderRadius: 4,
+                        }]
+                    },
+                    options: {
+                       ...commonChartOptions,
+                       indexAxis: 'y',
+                       scales: {
+                            x: {
+                                stacked: true,
+                                ticks: { display: false },
+                                grid: { display: false },
+                                border: { display: false }
+                            },
+                            y: {
+                                stacked: true,
+                                ...commonChartOptions.scales.y,
+                                grid: { display: false },
+                                border: { display: false }
+                            }
+                       },
+                       plugins: {
+                            ...commonChartOptions.plugins,
+                            legend: {
+                                position: 'bottom'
+                            }
+                       }
+                    }
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
